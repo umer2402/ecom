@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 Route::get('/', function () {
     
     $cats=DB::table('categories')->orderBy('categoryName')->get();
@@ -27,7 +28,11 @@ Route::get('home', function (Request $request) {
     ->orderBy('products.createdAt', 'desc')
     ->take(8)
     ->get();
-    return view('home',['recent_products'=>$recent_products]);
+    $categories = DB::table('categories')
+        ->orderBy('categoryName')
+        ->take(8)
+        ->get();
+    return view('home',['recent_products'=>$recent_products, 'categories' => $categories]);
 })->middleware('auth')->name('home');
 Route::get('user', function () {
     if (Auth::check()) {
@@ -276,6 +281,16 @@ Route::post('/chat/send', function (Request $request) {
 })->middleware('auth');
 Route::prefix('store/cart')->group(function() {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::patch('/update', [CartController::class, 'updateCart'])->name('cart.update');
     Route::post('/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::delete('/remove/{product}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 })->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('checkout', [OrderController::class, 'checkout'])->name('checkout.index');
+    Route::post('checkout', [OrderController::class, 'place'])->name('checkout.place');
+    Route::get('my-orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{orderId}', [OrderController::class, 'show'])
+        ->whereNumber('orderId')
+        ->name('orders.show');
+});

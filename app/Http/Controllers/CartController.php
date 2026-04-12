@@ -54,6 +54,26 @@ class CartController extends Controller
         return view('cart.index', compact('cartItems', 'products', 'subtotal'));
     }
 
+    public function updateCart(Request $request)
+    {
+        $validated = $request->validate([
+            'quantities' => 'required|array',
+            'quantities.*' => 'required|integer|min:1',
+        ]);
+
+        $cart = session()->get('cart', []);
+
+        foreach ($validated['quantities'] as $productId => $quantity) {
+            if (isset($cart[$productId])) {
+                $cart[$productId]['quantity'] = (int) $quantity;
+            }
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('cart.index')->with('status', 'Cart updated successfully.');
+    }
+
     public function addToCart(Request $request, $productId)
     {
         // Validate product ID

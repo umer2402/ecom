@@ -8,9 +8,12 @@
 </head>
 <body>
 <main id="panel" class="panel">
-    <div class="container-fluid">
-        @include ('navbar')
-    </div>
+    <header id="header">
+        @include('topbar')
+        <div class="container-fluid">
+            @include('navbar')
+        </div>
+    </header>
 
     <div class="breadcrumbs">
         <div class="container">
@@ -87,6 +90,7 @@
         </div>
     </div>
 </main>
+@include('footer')
 @include ('jslinks')
 @include ('cartjs')
 </body>
