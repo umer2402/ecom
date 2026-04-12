@@ -28,7 +28,7 @@ Route::get('home', function (Request $request) {
     ->take(8)
     ->get();
     return view('home',['recent_products'=>$recent_products]);
-})->name('home');
+})->middleware('auth')->name('home');
 Route::get('user', function () {
     
     return view('userLogin');
@@ -181,7 +181,7 @@ Route::get('explore-{storeName}', function ($storeName) {
     }
 
     return redirect()->route('stores.show', ['storeId' => $store->storeId]);
-});
+})->middleware('auth');
 Route::get('products/{productId}', function (int $productId) {
     $product = DB::table('products')
         ->leftJoin('stores', 'products.storeId', '=', 'stores.storeId')
@@ -211,7 +211,7 @@ Route::get('products/{productId}', function (int $productId) {
 })->middleware('auth')->whereNumber('productId')->name('products.show');
 Route::get('view-{productId}', function (int $productId) {
     return redirect()->route('products.show', ['productId' => $productId]);
-})->whereNumber('productId');
+})->middleware('auth')->whereNumber('productId');
 
 
 // Chat routes
@@ -236,7 +236,7 @@ Route::post('/chat/with/{sellerId}', function ($sellerId) {
         ->get();
 
     return response()->json($messages); 
-});
+})->middleware('auth');
 
 Route::post('/chat/send', function (Request $request) {
     if (!Auth::check()) {
@@ -270,9 +270,9 @@ Route::post('/chat/send', function (Request $request) {
         'message' => $message,
         'timestamp' => now()->format('h:i A')
     ]);
-});
+})->middleware('auth');
 Route::prefix('store/cart')->group(function() {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::post('/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::delete('/remove/{product}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-});
+})->middleware('auth');
