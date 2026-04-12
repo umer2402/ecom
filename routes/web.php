@@ -30,6 +30,9 @@ Route::get('home', function (Request $request) {
     return view('home',['recent_products'=>$recent_products]);
 })->middleware('auth')->name('home');
 Route::get('user', function () {
+    if (Auth::check()) {
+        return redirect()->route('home');
+    }
     
     return view('userLogin');
 })->name('user.login');

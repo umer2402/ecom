@@ -42,9 +42,9 @@
 
         <!-- Right side buttons -->
         <div class="d-flex align-items-center flex-wrap right-options">
-          <a href="{{ route('user.login') }}"><button class="create-account-btn me-2 mb-2 mb-lg-0">Create Account</button></a>
-          <a href="{{ route('user.login') }}" class="icon-btn"><i class="bi bi-person"></i></a>
-          <a href="{{ route('user.login') }}" class="icon-btn"><i class="bi bi-cart3"></i></a>
+          <a href="{{ auth()->check() ? route('home') : route('user.login') }}"><button class="create-account-btn me-2 mb-2 mb-lg-0">Create Account</button></a>
+          <a href="{{ route('home') }}" class="icon-btn"><i class="bi bi-person"></i></a>
+          <a href="{{ route('cart.index') }}" class="icon-btn"><i class="bi bi-cart3"></i></a>
 
           <select class="form-select form-select-sm">
             <option>English</option>
@@ -67,7 +67,7 @@
 
   <!-- Bottom navigation links -->
   <div class="bottom-nav d-flex justify-content-center flex-wrap">
-    <a href="{{ route('user.login') }}">All Categories</a>
+    <a href="{{ route('stores.index') }}">All Categories</a>
     <a href="#">Order Protection</a>
     <a href="#">Help Center</a>
     <a href="#">Become a Supplier</a>
