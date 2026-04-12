@@ -169,7 +169,7 @@
         }
         </style>
 
-    
+@isset($store)
     <!-- Floating Chat Button -->
     <div class="chat-btn bounce" id="chatButton">
         <i class="fa fa-wechat"></i>
@@ -295,3 +295,4 @@
 
         });
     </script>
+@endisset
