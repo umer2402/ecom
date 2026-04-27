@@ -68,10 +68,9 @@
       .hero-search-band {
         position: relative;
         z-index: 8;
-        padding: 18px 0 10px;
-        background:
-          radial-gradient(circle at 12% 12%, rgba(255, 122, 26, 0.22), transparent 20%),
-          linear-gradient(180deg, #0d0f13 0%, #11151d 100%);
+        margin-top: -74px;
+        padding: 0 0 18px;
+        background: transparent;
       }
       .hero-search-shell {
         position: relative;
@@ -426,7 +425,8 @@
       }
       @media (max-width: 991.98px) {
         .hero-search-band {
-          padding-top: 14px;
+          margin-top: -52px;
+          padding-bottom: 14px;
         }
         .hero-search-shell {
           padding: 22px 20px 18px;
@@ -455,6 +455,10 @@
         .ahx-info-card { display: none; }
       }
       @media (max-width: 767.98px) {
+        .hero-search-band {
+          margin-top: -26px;
+          padding-bottom: 8px;
+        }
         .navbar-custom .container-fluid {
           padding: 12px 14px;
         }
@@ -1122,54 +1126,6 @@
     <a href="#">Who We Help</a>
     <a href="#">Learn</a>
   </div>
-  <section class="hero-search-band">
-    <div class="container">
-      <div class="hero-search-shell">
-        <div class="hero-search-intro">
-          <div>
-            <span class="hero-search-kicker">
-              <i class="bi bi-stars"></i>
-              Discover Faster
-            </span>
-            <h2 class="hero-search-title">Find products, suppliers and wholesale deals in one place</h2>
-          </div>
-          <p>Choose a category, search what you need, and jump straight into Pakistan’s verified B2B marketplace.</p>
-        </div>
-
-        <form class="hero-search-form" id="heroSearchForm" action="{{ route('stores.index') }}" method="get">
-          <div class="hero-search-field">
-            <span class="hero-search-field-icon"><i class="bi bi-grid"></i></span>
-            <select class="hero-search-select" id="heroCategorySelect" aria-label="Browse by category">
-              <option value="">Browse categories</option>
-              @foreach($categories as $category)
-                <option value="{{ route('categories.show', $category->categoryId) }}">{{ $category->categoryName }}</option>
-              @endforeach
-            </select>
-          </div>
-
-          <div class="hero-search-field">
-            <span class="hero-search-field-icon"><i class="bi bi-search"></i></span>
-            <input class="hero-search-input" type="search" name="q" placeholder="Search for products, suppliers, brands or offers">
-          </div>
-
-          <button class="hero-search-button" type="submit">
-            <i class="bi bi-arrow-up-right-circle"></i>
-            Explore Market
-          </button>
-        </form>
-
-        <div class="hero-search-tags">
-          <span class="hero-search-tag-label">Popular:</span>
-          @foreach($categories->take(5) as $category)
-            <a href="{{ route('categories.show', $category->categoryId) }}" class="hero-search-tag">
-              <i class="bi bi-box-seam"></i>
-              {{ $category->categoryName }}
-            </a>
-          @endforeach
-        </div>
-      </div>
-    </div>
-  </section>
 @php
   $headerStars = [];
   for ($i = 1; $i <= 70; $i++) {
@@ -1323,6 +1279,54 @@
     </div>
   </div>
   <div class="ahx-fade"></div>
+</section>
+<section class="hero-search-band">
+  <div class="container">
+    <div class="hero-search-shell">
+      <div class="hero-search-intro">
+        <div>
+          <span class="hero-search-kicker">
+            <i class="bi bi-stars"></i>
+            Discover Faster
+          </span>
+          <h2 class="hero-search-title">Find products, suppliers and wholesale deals in one place</h2>
+        </div>
+        <p>Choose a category, search what you need, and jump straight into Pakistan’s verified B2B marketplace.</p>
+      </div>
+
+      <form class="hero-search-form" id="heroSearchForm" action="{{ route('stores.index') }}" method="get">
+        <div class="hero-search-field">
+          <span class="hero-search-field-icon"><i class="bi bi-grid"></i></span>
+          <select class="hero-search-select" id="heroCategorySelect" aria-label="Browse by category">
+            <option value="">Browse categories</option>
+            @foreach($categories as $category)
+              <option value="{{ route('categories.show', $category->categoryId) }}">{{ $category->categoryName }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        <div class="hero-search-field">
+          <span class="hero-search-field-icon"><i class="bi bi-search"></i></span>
+          <input class="hero-search-input" type="search" name="q" placeholder="Search for products, suppliers, brands or offers">
+        </div>
+
+        <button class="hero-search-button" type="submit">
+          <i class="bi bi-arrow-up-right-circle"></i>
+          Explore Market
+        </button>
+      </form>
+
+      <div class="hero-search-tags">
+        <span class="hero-search-tag-label">Popular:</span>
+        @foreach($categories->take(5) as $category)
+          <a href="{{ route('categories.show', $category->categoryId) }}" class="hero-search-tag">
+            <i class="bi bi-box-seam"></i>
+            {{ $category->categoryName }}
+          </a>
+        @endforeach
+      </div>
+    </div>
+  </div>
 </section>
 <!-- ISO Certified Section -->
 <section class="iso-section py-5 bg-light text-center">
