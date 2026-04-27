@@ -761,6 +761,58 @@
           gap: 14px 18px;
         }
       }
+
+      body.is-scroll-animations-ready .scroll-fx {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translate3d(0, 48px, 0) scale(0.985);
+        transition:
+          opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--scroll-delay, 0ms),
+          transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) var(--scroll-delay, 0ms),
+          filter 0.85s ease var(--scroll-delay, 0ms);
+        will-change: opacity, transform, filter;
+      }
+
+      body.is-scroll-animations-ready .scroll-fx.scroll-fx-soft {
+        filter: blur(6px);
+        transform: translate3d(0, 28px, 0) scale(0.992);
+      }
+
+      body.is-scroll-animations-ready .scroll-fx.scroll-fx-up {
+        transform: translate3d(0, 48px, 0) scale(0.985);
+      }
+
+      body.is-scroll-animations-ready .scroll-fx.scroll-fx-down {
+        transform: translate3d(0, -48px, 0) scale(0.985);
+      }
+
+      body.is-scroll-animations-ready .scroll-fx.scroll-fx-left {
+        transform: translate3d(-52px, 10px, 0) scale(0.985);
+      }
+
+      body.is-scroll-animations-ready .scroll-fx.scroll-fx-right {
+        transform: translate3d(52px, 10px, 0) scale(0.985);
+      }
+
+      body.is-scroll-animations-ready .scroll-fx.is-visible {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body.is-scroll-animations-ready .scroll-fx,
+        body.is-scroll-animations-ready .scroll-fx.scroll-fx-soft,
+        body.is-scroll-animations-ready .scroll-fx.scroll-fx-up,
+        body.is-scroll-animations-ready .scroll-fx.scroll-fx-down,
+        body.is-scroll-animations-ready .scroll-fx.scroll-fx-left,
+        body.is-scroll-animations-ready .scroll-fx.scroll-fx-right {
+          opacity: 1;
+          filter: none;
+          transform: none;
+          transition: none;
+        }
+      }
     </style>
 </head>
 <body>
@@ -2019,6 +2071,99 @@
         </div>
     </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    return;
+  }
+
+  document.body.classList.add('is-scroll-animations-ready');
+
+  const toArray = (items) => Array.from(items || []).filter(Boolean);
+
+  const registerTargets = (elements, options = {}) => {
+    const {
+      effect = 'up',
+      delayStep = 0,
+      baseDelay = 0,
+      soft = false
+    } = options;
+
+    Array.from(new Set(elements)).forEach((element, index) => {
+      if (!(element instanceof HTMLElement) || element.dataset.scrollFxBound === '1') {
+        return;
+      }
+
+      const selectedEffect = typeof effect === 'function' ? effect(element, index) : effect;
+
+      element.dataset.scrollFxBound = '1';
+      element.classList.add('scroll-fx', 'scroll-fx-' + (selectedEffect || 'up'));
+
+      if (soft) {
+        element.classList.add('scroll-fx-soft');
+      }
+
+      element.style.setProperty('--scroll-delay', Math.min(baseDelay + ((index % 6) * delayStep), 420) + 'ms');
+    });
+  };
+
+  registerTargets(
+    toArray(document.querySelectorAll(
+      'section:not(.animated-market-hero) > .container, ' +
+      'section:not(.animated-market-hero) > .container-fluid, ' +
+      '.cta-section > .cta-overlay, ' +
+      'footer.market-footer > .container'
+    )),
+    {
+      effect: function (_, index) {
+        return index % 2 === 0 ? 'up' : 'down';
+      },
+      soft: true
+    }
+  );
+
+  registerTargets(
+    toArray(document.querySelectorAll('section:not(.animated-market-hero) .row > [class*="col-"] > *')),
+    {
+      effect: function (_, index) {
+        return index % 2 === 0 ? 'up' : 'down';
+      },
+      delayStep: 55,
+      baseDelay: 70
+    }
+  );
+
+  registerTargets(
+    toArray(document.querySelectorAll('.faq-item, .market-footer-brand, .market-footer-subscribe, .market-footer-column')),
+    {
+      effect: function (_, index) {
+        const effects = ['left', 'right', 'up', 'down'];
+        return effects[index % effects.length];
+      },
+      delayStep: 70,
+      baseDelay: 90
+    }
+  );
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
+      }
+    });
+  }, {
+    threshold: 0.14,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  toArray(document.querySelectorAll('.scroll-fx')).forEach(function (target) {
+    observer.observe(target);
+  });
+});
+</script>
 
 </body>
 </html>
