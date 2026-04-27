@@ -73,138 +73,115 @@
         background: transparent;
       }
       .hero-search-shell {
-        position: relative;
-        overflow: hidden;
-        padding: 26px 28px 22px;
-        border-radius: 30px;
-        background:
-          linear-gradient(145deg, rgba(255,255,255,0.97) 0%, rgba(255,244,233,0.98) 55%, rgba(255,238,221,0.99) 100%);
-        border: 1px solid rgba(255, 145, 44, 0.18);
-        box-shadow:
-          0 26px 58px rgba(0, 0, 0, 0.25),
-          inset 0 1px 0 rgba(255,255,255,0.9);
+        max-width: 900px;
       }
-      .hero-search-shell::before,
-      .hero-search-shell::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-      }
-      .hero-search-shell::before {
-        width: 230px;
-        height: 230px;
-        top: -120px;
-        right: -70px;
-        background: radial-gradient(circle, rgba(255, 122, 26, 0.16) 0%, rgba(255, 122, 26, 0) 70%);
-      }
-      .hero-search-shell::after {
-        width: 180px;
-        height: 180px;
-        left: -40px;
-        bottom: -80px;
-        background: radial-gradient(circle, rgba(255, 214, 172, 0.55) 0%, rgba(255, 214, 172, 0) 72%);
-      }
-      .hero-search-intro,
       .hero-search-form,
       .hero-search-tags {
         position: relative;
         z-index: 1;
       }
-      .hero-search-intro {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 20px 28px;
-        margin-bottom: 20px;
-      }
-      .hero-search-kicker {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(255, 122, 26, 0.12);
-        color: #ba5700;
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-      }
-      .hero-search-title {
-        margin: 0;
-        color: #1b130c;
-        font-size: clamp(26px, 2.4vw, 36px);
-        line-height: 1.08;
-        letter-spacing: -.03em;
-      }
-      .hero-search-intro p {
-        max-width: 360px;
-        margin: 0;
-        color: #71523a;
-        font-size: 15px;
-        line-height: 1.7;
-      }
       .hero-search-form {
+        display: block;
+      }
+      .hero-search-pill {
+        position: relative;
         display: grid;
-        grid-template-columns: 240px minmax(0, 1fr) auto;
-        gap: 14px;
+        grid-template-columns: 196px minmax(0, 1fr) 152px;
         align-items: center;
+        gap: 0;
+        padding: 10px;
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(248,245,241,0.99) 100%);
+        border: 1px solid rgba(255,255,255,0.72);
+        box-shadow:
+          0 18px 42px rgba(0, 0, 0, 0.28),
+          0 0 36px rgba(255, 122, 26, 0.22),
+          inset 0 1px 0 rgba(255,255,255,0.96);
       }
       .hero-search-field {
         position: relative;
+        min-width: 0;
       }
-      .hero-search-field-icon {
+      .hero-search-select-wrap {
+        padding-right: 8px;
+      }
+      .hero-search-select-wrap::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 1px;
+        height: 34px;
+        background: rgba(32, 21, 13, 0.12);
+        transform: translateY(-50%);
+      }
+      .hero-search-select-caret {
+        position: absolute;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #84808a;
+        font-size: 16px;
+        pointer-events: none;
+      }
+      .hero-search-input-wrap::before {
+        content: "\F52A";
+        font-family: bootstrap-icons;
         position: absolute;
         left: 18px;
         top: 50%;
         transform: translateY(-50%);
-        color: #ff7a1a;
-        font-size: 17px;
+        color: #777d87;
+        font-size: 18px;
         pointer-events: none;
       }
       .hero-search-select,
       .hero-search-input {
         width: 100%;
-        height: 62px;
-        border: 1px solid rgba(255, 145, 44, 0.18);
-        border-radius: 18px;
-        background: rgba(255,255,255,0.84);
-        color: #20150d;
-        font-size: 15px;
-        font-weight: 500;
-        padding: 0 18px 0 50px;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
-        transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-      }
-      .hero-search-select:focus,
-      .hero-search-input:focus {
-        outline: none;
-        border-color: rgba(255, 122, 26, 0.45);
-        box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
-        transform: translateY(-1px);
-      }
-      .hero-search-button {
-        height: 62px;
+        height: 60px;
         border: none;
         border-radius: 18px;
-        padding: 0 28px;
+        background: transparent;
+        color: #202531;
+        font-size: 16px;
+        box-shadow: none;
+        transition: background .2s ease;
+      }
+      .hero-search-select {
+        appearance: none;
+        font-weight: 700;
+        padding: 0 42px 0 18px;
+      }
+      .hero-search-input {
+        font-weight: 500;
+        padding: 0 18px 0 52px;
+      }
+      .hero-search-select:focus,
+      .hero-search-input:focus,
+      .hero-search-pill:focus-within {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
+      }
+      .hero-search-button {
+        height: 58px;
+        border: none;
+        border-radius: 20px;
+        padding: 0 24px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 8px;
         background: linear-gradient(135deg, #ff7a1a 0%, #ff9a43 100%);
         color: #fff;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 800;
         letter-spacing: .01em;
-        box-shadow: 0 18px 34px rgba(255, 122, 26, 0.24);
+        box-shadow: 0 12px 26px rgba(255, 122, 26, 0.28);
         transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
       }
       .hero-search-button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 24px 36px rgba(255, 122, 26, 0.28);
+        box-shadow: 0 18px 32px rgba(255, 122, 26, 0.34);
         filter: saturate(1.05);
       }
       .hero-search-tags {
@@ -215,29 +192,32 @@
         margin-top: 18px;
       }
       .hero-search-tag-label {
-        color: #76553d;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255,255,255,0.74);
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
       }
       .hero-search-tag {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 9px 14px;
+        padding: 9px 16px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.72);
-        border: 1px solid rgba(255, 145, 44, 0.15);
-        color: #2c1b11;
+        background: rgba(33, 39, 53, 0.88);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.92);
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
         text-decoration: none;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
         transition: transform .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
       }
       .hero-search-tag:hover {
         transform: translateY(-2px);
-        border-color: rgba(255, 122, 26, 0.4);
-        background: rgba(255, 245, 236, 0.98);
-        color: #c95f00;
+        border-color: rgba(255, 122, 26, 0.34);
+        background: rgba(40, 47, 63, 0.96);
+        color: #fff;
       }
       .ahx-copy { position: relative; z-index: 5; }
       .ahx-trust-pill {
@@ -413,11 +393,8 @@
       @keyframes ahx-float-d { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-10px,-12px); } }
       @keyframes ahx-live { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .65; transform: scale(1.25); } }
       @media (max-width: 1199px) {
-        .hero-search-form {
-          grid-template-columns: 220px minmax(0, 1fr);
-        }
-        .hero-search-button {
-          grid-column: 1 / -1;
+        .hero-search-pill {
+          grid-template-columns: 184px minmax(0, 1fr) 144px;
         }
         .ahx-sphere-wrap { right: -40px; top: 8px; width: 480px; height: 480px; opacity: .55; }
         .ahx-visual-copy { max-width: 350px; margin-top: 310px; margin-right: 0; }
@@ -429,18 +406,13 @@
           padding-bottom: 14px;
         }
         .hero-search-shell {
-          padding: 22px 20px 18px;
-          border-radius: 24px;
-        }
-        .hero-search-intro {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .hero-search-intro p {
           max-width: none;
         }
-        .hero-search-form {
+        .hero-search-pill {
           grid-template-columns: 1fr;
+          gap: 8px;
+          padding: 12px;
+          border-radius: 24px;
         }
         .hero-search-button {
           width: 100%;
@@ -470,16 +442,20 @@
           min-width: 88px;
         }
         .hero-search-shell {
-          padding: 20px 16px 16px;
-        }
-        .hero-search-title {
-          font-size: 24px;
+          max-width: none;
         }
         .hero-search-select,
         .hero-search-input,
         .hero-search-button {
           height: 56px;
           border-radius: 16px;
+        }
+        .hero-search-pill {
+          padding: 10px;
+          border-radius: 22px;
+        }
+        .hero-search-select-wrap::after {
+          display: none;
         }
         .hero-search-tags {
           gap: 8px;
@@ -1283,45 +1259,34 @@
 <section class="hero-search-band">
   <div class="container">
     <div class="hero-search-shell">
-      <div class="hero-search-intro">
-        <div>
-          <span class="hero-search-kicker">
-            <i class="bi bi-stars"></i>
-            Discover Faster
-          </span>
-          <h2 class="hero-search-title">Find products, suppliers and wholesale deals in one place</h2>
-        </div>
-        <p>Choose a category, search what you need, and jump straight into Pakistan’s verified B2B marketplace.</p>
-      </div>
-
       <form class="hero-search-form" id="heroSearchForm" action="{{ route('stores.index') }}" method="get">
-        <div class="hero-search-field">
-          <span class="hero-search-field-icon"><i class="bi bi-grid"></i></span>
-          <select class="hero-search-select" id="heroCategorySelect" aria-label="Browse by category">
-            <option value="">Browse categories</option>
-            @foreach($categories as $category)
-              <option value="{{ route('categories.show', $category->categoryId) }}">{{ $category->categoryName }}</option>
-            @endforeach
-          </select>
-        </div>
+        <div class="hero-search-pill">
+          <div class="hero-search-field hero-search-select-wrap">
+            <select class="hero-search-select" id="heroCategorySelect" aria-label="Browse by category">
+              <option value="">Products</option>
+              @foreach($categories as $category)
+                <option value="{{ route('categories.show', $category->categoryId) }}">{{ $category->categoryName }}</option>
+              @endforeach
+            </select>
+            <i class="bi bi-chevron-down hero-search-select-caret"></i>
+          </div>
 
-        <div class="hero-search-field">
-          <span class="hero-search-field-icon"><i class="bi bi-search"></i></span>
-          <input class="hero-search-input" type="search" name="q" placeholder="Search for products, suppliers, brands or offers">
-        </div>
+          <div class="hero-search-field hero-search-input-wrap">
+            <input class="hero-search-input" type="search" name="q" placeholder="Search 2M+ products & suppliers...">
+          </div>
 
-        <button class="hero-search-button" type="submit">
-          <i class="bi bi-arrow-up-right-circle"></i>
-          Explore Market
-        </button>
+          <button class="hero-search-button" type="submit">
+            Search
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
       </form>
 
       <div class="hero-search-tags">
-        <span class="hero-search-tag-label">Popular:</span>
-        @foreach($categories->take(5) as $category)
+        <span class="hero-search-tag-label"><i class="bi bi-graph-up-arrow text-warning"></i> Trending:</span>
+        @foreach($categories->take(6) as $category)
           <a href="{{ route('categories.show', $category->categoryId) }}" class="hero-search-tag">
-            <i class="bi bi-box-seam"></i>
-            {{ $category->categoryName }}
+            {{ \Illuminate\Support\Str::limit($category->categoryName, 20) }}
           </a>
         @endforeach
       </div>
