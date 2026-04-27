@@ -229,6 +229,199 @@
         .ahx-chip { font-size: 12px; padding: 7px 12px; }
         .ahx-sphere-wrap, .ahx-shape { display: none; }
       }
+
+      .how-it-works-section {
+        position: relative;
+        overflow: hidden;
+        padding: 110px 0;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(255, 173, 94, 0.28), transparent 24%),
+          radial-gradient(circle at 88% 16%, rgba(255, 209, 156, 0.55), transparent 26%),
+          linear-gradient(135deg, #fff7ef 0%, #ffe3c1 48%, #ffc98b 100%);
+      }
+
+      .how-it-works-section::before,
+      .how-it-works-section::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .how-it-works-section::before {
+        width: 340px;
+        height: 340px;
+        top: -120px;
+        left: -90px;
+        background: radial-gradient(circle, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 72%);
+      }
+
+      .how-it-works-section::after {
+        width: 420px;
+        height: 420px;
+        right: -180px;
+        bottom: -180px;
+        background: radial-gradient(circle, rgba(255, 122, 26, 0.18) 0%, rgba(255, 122, 26, 0) 72%);
+      }
+
+      .how-it-works-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .how-it-works-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.72);
+        border: 1px solid rgba(255, 145, 44, 0.25);
+        color: #bf5a00;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        box-shadow: 0 14px 32px rgba(191, 90, 0, 0.08);
+      }
+
+      .how-it-works-heading {
+        max-width: 720px;
+        margin: 0 auto 26px;
+      }
+
+      .how-it-works-heading h2 {
+        color: #1f140b;
+        font-size: clamp(34px, 4vw, 54px);
+        line-height: 1.05;
+        letter-spacing: -.03em;
+        margin: 18px 0 14px;
+      }
+
+      .how-it-works-heading p {
+        color: #6e4a2d;
+        font-size: 17px;
+        line-height: 1.7;
+        margin: 0 auto;
+      }
+
+      .how-steps-grid {
+        position: relative;
+        margin-top: 54px;
+      }
+
+      .how-steps-grid::before {
+        content: "";
+        position: absolute;
+        left: 18%;
+        right: 18%;
+        top: 96px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(255,122,26,0.08), rgba(255,122,26,0.45), rgba(255,122,26,0.08));
+        z-index: 1;
+      }
+
+      .how-step-card {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        padding: 34px 28px 28px;
+        border-radius: 30px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,248,240,0.96) 100%);
+        border: 1px solid rgba(255, 145, 44, 0.18);
+        box-shadow:
+          0 22px 48px rgba(129, 71, 14, 0.12),
+          inset 0 1px 0 rgba(255,255,255,0.9);
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      }
+
+      .how-step-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(255, 122, 26, 0.4);
+        box-shadow:
+          0 28px 58px rgba(129, 71, 14, 0.18),
+          inset 0 1px 0 rgba(255,255,255,0.95);
+      }
+
+      .how-step-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 58px;
+        height: 34px;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #ff7a1a 0%, #ffb057 100%);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: .14em;
+        box-shadow: 0 14px 24px rgba(255, 122, 26, 0.24);
+      }
+
+      .how-step-icon {
+        width: 78px;
+        height: 78px;
+        margin: 22px auto 18px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: #ff7a1a;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,233,209,0.95) 58%, rgba(255,200,136,0.9) 100%);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.95),
+          0 18px 26px rgba(255, 145, 44, 0.18);
+      }
+
+      .how-step-card h5 {
+        color: #23160d;
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+
+      .how-step-card p {
+        color: #6d4f37;
+        font-size: 15px;
+        line-height: 1.75;
+        margin: 0;
+      }
+
+      .how-step-accent {
+        width: 64px;
+        height: 4px;
+        margin: 20px auto 0;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(255,122,26,0.18), rgba(255,122,26,0.95), rgba(255,122,26,0.18));
+      }
+
+      @media (max-width: 991.98px) {
+        .how-it-works-section {
+          padding: 88px 0;
+        }
+
+        .how-steps-grid::before {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .how-it-works-section {
+          padding: 72px 0;
+        }
+
+        .how-step-card {
+          padding: 28px 22px 24px;
+          border-radius: 24px;
+        }
+
+        .how-step-card h5 {
+          font-size: 22px;
+        }
+      }
     </style>
 </head>
 <body>
@@ -628,58 +821,54 @@
   </div>
 </section>
 
-<section class="how-it-works py-5">
-  <div class="container text-center">
-
-    <h2 class="fw-bold text-white">How It Works</h2>
-    <p class="text-light mb-5">Start your wholesale journey in 3 simple steps</p>
-
-    <div class="row g-4 justify-content-center">
-
-      <!-- Step 1 -->
-      <div class="col-12 col-md-4">
-        <div class="how-card">
-          <span class="step-number">01</span>
-          <div class="icon-box">
-            <i class="bi bi-search"></i>
-          </div>
-          <h5 class="fw-semibold text-white mt-3">Find Supplier</h5>
-          <p class="text-secondary small">
-            Browse thousands of verified suppliers and products in Pakistan
-          </p>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="col-12 col-md-4">
-        <div class="how-card">
-          <span class="step-number">02</span>
-          <div class="icon-box">
-            <i class="bi bi-shield-check"></i>
-          </div>
-          <h5 class="fw-semibold text-white mt-3">Secure Payment</h5>
-          <p class="text-secondary small">
-            Pay safely with our protected payment system
-          </p>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="col-12 col-md-4">
-        <div class="how-card">
-          <span class="step-number">03</span>
-          <div class="icon-box">
-            <i class="bi bi-truck"></i>
-          </div>
-          <h5 class="fw-semibold text-white mt-3">Get Delivery</h5>
-          <p class="text-secondary small">
-            Receive your bulk order at your doorstep nationwide
-          </p>
-        </div>
-      </div>
-
+<section class="how-it-works-section">
+  <div class="container how-it-works-shell text-center">
+    <span class="how-it-works-kicker">
+      <i class="bi bi-stars"></i>
+      Wholesale Flow
+    </span>
+    <div class="how-it-works-heading">
+      <h2 class="fw-bold">How It Works</h2>
+      <p>Start your wholesale journey in 3 simple steps</p>
     </div>
 
+    <div class="row g-4 justify-content-center how-steps-grid">
+      <div class="col-12 col-md-4">
+        <div class="how-step-card text-center">
+          <span class="how-step-badge">01</span>
+          <div class="how-step-icon">
+            <i class="bi bi-search"></i>
+          </div>
+          <h5 class="fw-bold">Find Supplier</h5>
+          <p>Browse thousands of verified suppliers and products in Pakistan</p>
+          <div class="how-step-accent"></div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="how-step-card text-center">
+          <span class="how-step-badge">02</span>
+          <div class="how-step-icon">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <h5 class="fw-bold">Secure Payment</h5>
+          <p>Pay safely with our protected payment system</p>
+          <div class="how-step-accent"></div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="how-step-card text-center">
+          <span class="how-step-badge">03</span>
+          <div class="how-step-icon">
+            <i class="bi bi-truck"></i>
+          </div>
+          <h5 class="fw-bold">Get Delivery</h5>
+          <p>Receive your bulk order at your doorstep nationwide</p>
+          <div class="how-step-accent"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section> 
 <section class="py-5 bg-light">
