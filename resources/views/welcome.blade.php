@@ -422,6 +422,345 @@
           font-size: 22px;
         }
       }
+
+      .market-footer {
+        background: #191d26;
+        color: rgba(255,255,255,0.82);
+        padding: 72px 0 24px;
+      }
+
+      .market-footer a {
+        color: rgba(255,255,255,0.82);
+        text-decoration: none;
+        transition: color .2s ease, opacity .2s ease, transform .2s ease;
+      }
+
+      .market-footer a:hover {
+        color: #ff7a1a;
+      }
+
+      .market-footer-shell {
+        position: relative;
+      }
+
+      .market-footer-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+        gap: 48px;
+        align-items: start;
+      }
+
+      .market-footer-brand {
+        max-width: 620px;
+      }
+
+      .market-footer-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .market-footer-logo-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #ff7a1a 0%, #ff9f4d 100%);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 800;
+        font-size: 22px;
+        box-shadow: 0 14px 30px rgba(255, 122, 26, 0.25);
+      }
+
+      .market-footer-logo-text {
+        font-size: clamp(28px, 2.6vw, 38px);
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -.03em;
+        color: #fff;
+      }
+
+      .market-footer-logo-text span {
+        color: #ff7a1a;
+      }
+
+      .market-footer-description {
+        max-width: 570px;
+        margin: 0;
+        color: rgba(255,255,255,0.74);
+        font-size: 17px;
+        line-height: 1.65;
+      }
+
+      .market-footer-socials {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .market-footer-social {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.03);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.82);
+        font-size: 18px;
+      }
+
+      .market-footer-social:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 122, 26, 0.42);
+        background: rgba(255, 122, 26, 0.10);
+      }
+
+      .market-footer-whatsapp {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 122, 26, 0.25);
+        background: rgba(255, 122, 26, 0.08);
+        color: #ff8d34 !important;
+        font-weight: 600;
+      }
+
+      .market-footer-subscribe {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 28px 28px 24px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+      }
+
+      .market-footer-subscribe h4 {
+        color: #fff;
+        margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .market-footer-subscribe p {
+        color: rgba(255,255,255,0.66);
+        margin-bottom: 22px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .market-footer-form {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .market-footer-input {
+        flex: 1;
+        height: 46px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        padding: 0 16px;
+        outline: none;
+        box-shadow: none;
+      }
+
+      .market-footer-input::placeholder {
+        color: rgba(255,255,255,0.44);
+      }
+
+      .market-footer-feedback {
+        margin: 0 0 16px;
+        padding: 10px 14px;
+        border-radius: 14px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .market-footer-feedback.is-success {
+        background: rgba(34, 197, 94, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.22);
+        color: #b8f5ca;
+      }
+
+      .market-footer-feedback.is-warning {
+        background: rgba(255, 184, 0, 0.10);
+        border: 1px solid rgba(255, 184, 0, 0.22);
+        color: #ffd98b;
+      }
+
+      .market-footer-field-error {
+        margin-top: -8px;
+        margin-bottom: 16px;
+        color: #ffb6a6;
+        font-size: 13px;
+      }
+
+      .market-footer-button {
+        border: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        background: linear-gradient(135deg, #ff7a1a 0%, #ff9b3f 100%);
+        color: #fff;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 14px 26px rgba(255, 122, 26, 0.24);
+      }
+
+      .market-footer-button:hover {
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      .market-footer-trust {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px 28px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .market-footer-trust li {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255,255,255,0.60);
+        font-size: 14px;
+      }
+
+      .market-footer-trust i {
+        color: #ff7a1a;
+      }
+
+      .market-footer-divider {
+        margin: 44px 0;
+        border: 0;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .market-footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 40px;
+      }
+
+      .market-footer-column h5 {
+        color: #fff;
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .market-footer-column p {
+        color: rgba(255,255,255,0.58);
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 18px;
+        max-width: 260px;
+      }
+
+      .market-footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .market-footer-links a {
+        font-size: 16px;
+      }
+
+      .market-footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        padding-top: 4px;
+      }
+
+      .market-footer-copy {
+        margin: 0;
+        color: rgba(255,255,255,0.52);
+        font-size: 15px;
+      }
+
+      .market-footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 22px;
+      }
+
+      .market-footer-legal a {
+        color: rgba(255,255,255,0.56);
+        font-size: 15px;
+      }
+
+      @media (max-width: 991.98px) {
+        .market-footer {
+          padding: 64px 0 24px;
+        }
+
+        .market-footer-top {
+          grid-template-columns: 1fr;
+        }
+
+        .market-footer-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 30px;
+        }
+
+        .market-footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .market-footer-legal {
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .market-footer {
+          padding: 54px 0 22px;
+        }
+
+        .market-footer-subscribe {
+          padding: 22px 18px 20px;
+          border-radius: 20px;
+        }
+
+        .market-footer-form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .market-footer-button {
+          justify-content: center;
+        }
+
+        .market-footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .market-footer-trust {
+          gap: 14px 18px;
+        }
+      }
     </style>
 </head>
 <body>
@@ -1556,85 +1895,128 @@
         </div>
     </div>
 </section>
-<footer class="footer-section pt-5 pb-3">
-    <div class="container">
-
-        <div class="row">
-
-            <!-- Left Column -->
-            <div class="col-md-4 mb-4">
-                <h4 class="footer-title">Hello Wholesaler</h4>
-                <p class="footer-text">
-                    Pakistan's most trusted B2B wholesale marketplace.  
-                    Connect with verified suppliers and grow your business.
+<footer class="market-footer">
+    <div class="container market-footer-shell">
+        <div class="market-footer-top">
+            <div class="market-footer-brand">
+                <div class="market-footer-logo">
+                    <span class="market-footer-logo-badge">H</span>
+                    <div class="market-footer-logo-text">Hello<span>Wholesaler</span></div>
+                </div>
+                <p class="market-footer-description">
+                    The trusted B2B sourcing marketplace. Connect with verified suppliers,
+                    import safely with Trade Assurance, and grow your online business backed by
+                    real support.
                 </p>
-
-                <!-- Social Icons -->
-                <div class="footer-social mt-3">
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-twitter-x"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                <div class="market-footer-socials">
+                    <a href="#" class="market-footer-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="market-footer-social" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="market-footer-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="market-footer-social" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="market-footer-whatsapp"><i class="bi bi-whatsapp"></i> WhatsApp Channel</a>
                 </div>
             </div>
 
-            <!-- Company -->
-            <div class="col-md-2 mb-4">
-                <h6 class="footer-heading">Company</h6>
-                <ul class="footer-links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                </ul>
-            </div>
-
-            <!-- Support -->
-            <div class="col-md-2 mb-4">
-                <h6 class="footer-heading">Support</h6>
-                <ul class="footer-links">
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Buyer Protection</a></li>
-                    <li><a href="#">Report Issue</a></li>
-                </ul>
-            </div>
-
-            <!-- Policies -->
-            <div class="col-md-2 mb-4">
-                <h6 class="footer-heading">Policies</h6>
-                <ul class="footer-links">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Return Policy</a></li>
-                    <li><a href="#">Payment Terms</a></li>
+            <div class="market-footer-subscribe" id="footer-subscribe">
+                <h4>Stay ahead of the market</h4>
+                <p>Weekly winning products, sourcing tips and supplier deals straight to your inbox.</p>
+                @if(session('newsletter_success'))
+                    <div class="market-footer-feedback is-success">{{ session('newsletter_success') }}</div>
+                @endif
+                @if(session('newsletter_status'))
+                    <div class="market-footer-feedback is-warning">{{ session('newsletter_status') }}</div>
+                @endif
+                <form action="{{ route('newsletter.subscribe') }}" method="post">
+                    @csrf
+                    <div class="market-footer-form">
+                        <input
+                            type="email"
+                            name="newsletter_email"
+                            class="market-footer-input"
+                            placeholder="you@business.com"
+                            value="{{ old('newsletter_email') }}"
+                        >
+                        <button type="submit" class="market-footer-button">
+                            <i class="bi bi-envelope"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+                @error('newsletter_email')
+                    <div class="market-footer-field-error">{{ $message }}</div>
+                @enderror
+                <ul class="market-footer-trust">
+                    <li><i class="bi bi-shield-check"></i> Trade Assurance</li>
+                    <li><i class="bi bi-lock"></i> Secure Escrow</li>
+                    <li><i class="bi bi-credit-card"></i> Safe Payments</li>
+                    <li><i class="bi bi-truck"></i> Tracked Delivery</li>
                 </ul>
             </div>
         </div>
 
-        <hr class="footer-divider">
+        <hr class="market-footer-divider">
 
-        <!-- Newsletter Section -->
-        <div class="newsletter-section mb-4">
-            <h6 class="footer-heading">Subscribe to Our Newsletter</h6>
-            <p class="footer-text">Get the latest deals and supplier updates delivered to your inbox</p>
+        <div class="market-footer-grid">
+            <div class="market-footer-column">
+                <h5>Marketplace</h5>
+                <p>Discover millions of wholesale products from verified suppliers across every category.</p>
+                <ul class="market-footer-links">
+                    <li><a href="{{ route('stores.index') }}">Browse Products</a></li>
+                    <li><a href="{{ route('stores.index') }}">Browse Suppliers</a></li>
+                    <li><a href="{{ route('stores.index') }}">All Categories</a></li>
+                    <li><a href="{{ route('stores.index') }}">Request for Quotation</a></li>
+                    <li><a href="{{ route('stores.index') }}">Wholesale Deals</a></li>
+                </ul>
+            </div>
 
-            <div class="newsletter-input d-flex align-items-center">
-                <input type="email" class="form-control footer-input" placeholder="Enter your email">
-                <button class="btn btn-default ms-2">
-                    <i class="bi bi-envelope"></i> Subscribe
-                </button>
+            <div class="market-footer-column">
+                <h5>For Buyers</h5>
+                <p>Source confidently with Trade Assurance, escrow payments and verified inspections.</p>
+                <ul class="market-footer-links">
+                    <li><a href="{{ route('stores.index') }}">Order Protection</a></li>
+                    <li><a href="{{ route('stores.index') }}">Verified Suppliers</a></li>
+                    <li><a href="{{ route('stores.index') }}">Quality Inspection</a></li>
+                    <li><a href="{{ route('orders.index') }}">Refund & Returns</a></li>
+                    <li><a href="{{ route('orders.index') }}">Track Your Order</a></li>
+                </ul>
+            </div>
+
+            <div class="market-footer-column">
+                <h5>For Sellers</h5>
+                <p>Reach high-intent buyers, manage orders and grow your wholesale business.</p>
+                <ul class="market-footer-links">
+                    <li><a href="{{ url('/seller') }}">Become a Supplier</a></li>
+                    <li><a href="{{ url('/seller') }}">Start Dropshipping</a></li>
+                    <li><a href="{{ url('/seller') }}">Seller Guide</a></li>
+                    <li><a href="{{ url('/seller') }}">Profit Calculator</a></li>
+                    <li><a href="{{ url('/seller') }}">Supplier Help Center</a></li>
+                </ul>
+            </div>
+
+            <div class="market-footer-column">
+                <h5>Support & Company</h5>
+                <p>Real humans, real answers — across help center, live chat and seller onboarding.</p>
+                <ul class="market-footer-links">
+                    <li><a href="{{ route('user.login') }}">Help Center</a></li>
+                    <li><a href="{{ route('user.login') }}">Contact Us</a></li>
+                    <li><a href="{{ route('user.login') }}">About Us</a></li>
+                    <li><a href="{{ route('user.login') }}">Careers</a></li>
+                    <li><a href="{{ route('user.login') }}">Privacy & Terms</a></li>
+                </ul>
             </div>
         </div>
 
-        <hr class="footer-divider">
+        <hr class="market-footer-divider">
 
-        <!-- Copyright -->
-        <div class="text-center pt-2 footer-copy">
-            © 2024 Hello Wholesaler. All rights reserved.  
-            Made with <span class="text-danger">❤</span> in Pakistan
+        <div class="market-footer-bottom">
+            <p class="market-footer-copy">&copy; {{ now()->year }} Hello Wholesaler. All rights reserved.</p>
+            <div class="market-footer-legal">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookies</a>
+                <a href="#">IP Policy</a>
+            </div>
         </div>
-
     </div>
 </footer>
 

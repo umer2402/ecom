@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 Route::get('/', function () {
@@ -108,6 +110,45 @@ Route::post('register', function (Request $request) {
     // Redirect with success message
     return redirect()->route('user.login')->with('success', 'Registration successful! Login Please.');
 })->name('register');
+
+Route::post('newsletter/subscribe', function (Request $request) {
+    $validated = $request->validate([
+        'newsletter_email' => 'required|string|email|max:255',
+    ], [], [
+        'newsletter_email' => 'email address',
+    ]);
+
+    if (!Schema::hasTable('newsletter_subscribers')) {
+        Schema::create('newsletter_subscribers', function (Blueprint $table) {
+            $table->id();
+            $table->string('email')->unique();
+            $table->string('source')->nullable();
+            $table->timestamp('subscribed_at')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    $email = strtolower(trim($validated['newsletter_email']));
+
+    $existing = DB::table('newsletter_subscribers')
+        ->where('email', $email)
+        ->first();
+
+    if ($existing) {
+        return back()->with('newsletter_status', 'You are already subscribed to updates.');
+    }
+
+    DB::table('newsletter_subscribers')->insert([
+        'email' => $email,
+        'source' => 'welcome_footer',
+        'subscribed_at' => now(),
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return back()->with('newsletter_success', 'Thanks for subscribing. We will send market updates to your inbox.');
+})->name('newsletter.subscribe');
+
 Route::get('sellers', function () {
     $stores = DB::table('stores')->where('storeStatus','Approved')->get();
     return view('sellersStore', ['stores' => $stores]);
