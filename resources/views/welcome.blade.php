@@ -100,7 +100,7 @@
       }
       .ahx-sphere-wrap {
         position: absolute;
-        right: -55px;
+        right: 15px;
         top: 12px;
         width: 560px;
         height: 560px;
@@ -209,7 +209,7 @@
       @keyframes ahx-float-d { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-10px,-12px); } }
       @keyframes ahx-live { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .65; transform: scale(1.25); } }
       @media (max-width: 1199px) {
-        .ahx-sphere-wrap { right: -120px; top: 8px; width: 480px; height: 480px; opacity: .55; }
+        .ahx-sphere-wrap { right: -40px; top: 8px; width: 480px; height: 480px; opacity: .55; }
         .ahx-shape-diamond, .ahx-shape-ring, .ahx-shape-triangle, .ahx-shape-hex { opacity: .7; }
       }
       @media (max-width: 991.98px) {
