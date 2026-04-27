@@ -84,13 +84,77 @@
       .ahx-stats { display: flex; gap: 42px; margin-top: 52px; animation: ahx-fade-up .8s ease-out .7s both; }
       .ahx-stat-num { font-size: 30px; line-height: 1; font-weight: 800; color: #fff; }
       .ahx-stat-label { color: var(--ahx-muted); font-size: 11px; letter-spacing: .14em; margin-top: 8px; }
-      .ahx-visual { position: relative; z-index: 5; min-height: 500px; }
-      .ahx-visual img {
-        position: relative; z-index: 3; max-height: 430px; filter: drop-shadow(0 20px 45px rgba(0,0,0,.4));
+      .ahx-visual {
+        position: relative;
+        z-index: 5;
+        min-height: 500px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
       }
-      .ahx-sphere-wrap { position: absolute; right: -65px; top: 50px; width: 560px; height: 560px; z-index: 3; }
-      .ahx-sphere-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 34px rgba(255, 122, 26, .25)); }
-      .ahx-sphere-rotate { transform-origin: center; animation: ahx-sphere 30s linear infinite; }
+      .ahx-visual-copy {
+        position: relative;
+        z-index: 5;
+        max-width: 320px;
+        padding-top: 28px;
+      }
+      .ahx-sphere-wrap {
+        position: absolute;
+        right: -65px;
+        top: 36px;
+        width: 560px;
+        height: 560px;
+        z-index: 3;
+        animation: ahx-sphere-float 10s ease-in-out infinite;
+      }
+      .ahx-sphere-wrap::before,
+      .ahx-sphere-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 10%;
+        border-radius: 50%;
+      }
+      .ahx-sphere-wrap::before {
+        background: radial-gradient(circle, rgba(255, 122, 26, 0.2) 0%, rgba(255, 122, 26, 0.06) 45%, transparent 72%);
+        filter: blur(16px);
+        transform: scale(1.08);
+      }
+      .ahx-sphere-wrap::after {
+        inset: 18%;
+        border: 1px solid rgba(255, 122, 26, 0.12);
+        animation: ahx-sphere-halo 14s linear infinite;
+      }
+      .ahx-sphere-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 34px rgba(255, 122, 26, .25));
+        overflow: visible;
+      }
+      .ahx-sphere-core,
+      .ahx-sphere-shell,
+      .ahx-sphere-latitudes,
+      .ahx-sphere-outline,
+      .ahx-sphere-outline-dashed {
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      .ahx-sphere-core {
+        animation: ahx-sphere-breathe 8s ease-in-out infinite;
+      }
+      .ahx-sphere-shell {
+        animation: ahx-sphere-spin 26s linear infinite;
+      }
+      .ahx-sphere-shell-secondary {
+        animation-duration: 18s;
+        animation-direction: reverse;
+        opacity: 0.52;
+      }
+      .ahx-sphere-latitudes {
+        animation: ahx-sphere-latitude 12s ease-in-out infinite;
+      }
+      .ahx-sphere-outline-dashed {
+        animation: ahx-sphere-dash 11s linear infinite;
+      }
       .ahx-info-card {
         position: absolute; z-index: 4; background: rgba(20, 20, 24, .78);
         border: 1px solid rgba(255, 122, 26, .25); border-radius: 16px; padding: 12px 16px;
@@ -129,7 +193,12 @@
       }
       @keyframes ahx-twinkle { 0%, 100% { opacity: .15; transform: scale(.8); } 50% { opacity: .95; transform: scale(1.08); } }
       @keyframes ahx-fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-      @keyframes ahx-sphere { 0% { transform: scaleX(1); } 25% { transform: scaleX(.08); } 50% { transform: scaleX(-1); } 75% { transform: scaleX(-.08); } 100% { transform: scaleX(1); } }
+      @keyframes ahx-sphere-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes ahx-sphere-latitude { 0%, 100% { transform: rotate(0deg) scaleY(1); } 50% { transform: rotate(10deg) scaleY(.92); } }
+      @keyframes ahx-sphere-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+      @keyframes ahx-sphere-float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(10px, -18px, 0); } }
+      @keyframes ahx-sphere-halo { from { transform: rotate(0deg) scale(1); } to { transform: rotate(360deg) scale(1.04); } }
+      @keyframes ahx-sphere-dash { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -120; } }
       @keyframes ahx-drift-1 { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(20px,-20px) rotate(10deg); } }
       @keyframes ahx-drift-2 { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-18px,12px); } }
       @keyframes ahx-drift-3 { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(12px,18px) rotate(120deg); } }
@@ -149,6 +218,7 @@
         .ahx-copy p { margin-left: auto; margin-right: auto; }
         .ahx-chip-row, .ahx-stats { justify-content: center; }
         .ahx-visual { min-height: 360px; margin-top: 36px; }
+        .ahx-visual-copy { padding-top: 0; }
         .ahx-sphere-wrap { right: 50%; transform: translateX(50%); top: 0; width: 420px; height: 420px; opacity: .38; }
         .ahx-info-card { display: none; }
       }
@@ -272,17 +342,29 @@
         </radialGradient>
       </defs>
       <circle cx="0" cy="0" r="200" fill="url(#welcomeSphereGlow)"></circle>
-      <g class="ahx-sphere-rotate">
-        <ellipse cx="0" cy="0" rx="200" ry="200" stroke="rgba(255,122,26,0.75)" stroke-width="1" fill="none"></ellipse>
-        <ellipse cx="0" cy="0" rx="184.78" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="0" rx="141.42" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="0" rx="76.54" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="0" rx=".5" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="0" rx="173.21" ry="100" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="-100" rx="173.21" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="100" rx="173.21" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="-173.21" rx="100" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
-        <ellipse cx="0" cy="173.21" rx="100" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+      <g class="ahx-sphere-core">
+        <g class="ahx-sphere-shell">
+          <ellipse cx="0" cy="0" rx="184.78" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="0" rx="141.42" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="0" rx="76.54" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="0" rx=".5" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        </g>
+        <g class="ahx-sphere-shell ahx-sphere-shell-secondary" transform="rotate(24)">
+          <ellipse cx="0" cy="0" rx="194" ry="200" stroke="rgba(255,154,74,0.35)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="0" rx="156" ry="200" stroke="rgba(255,154,74,0.35)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="0" rx="110" ry="200" stroke="rgba(255,154,74,0.35)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="0" rx="38" ry="200" stroke="rgba(255,154,74,0.35)" stroke-width=".8" fill="none"></ellipse>
+        </g>
+        <g class="ahx-sphere-latitudes">
+          <ellipse cx="0" cy="0" rx="173.21" ry="100" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="-100" rx="173.21" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="100" rx="173.21" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="-173.21" rx="100" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+          <ellipse cx="0" cy="173.21" rx="100" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        </g>
+        <circle cx="0" cy="0" r="200" class="ahx-sphere-outline" stroke="rgba(255,122,26,0.82)" stroke-width="1.2" fill="none"></circle>
+        <circle cx="0" cy="0" r="188" class="ahx-sphere-outline-dashed" stroke="rgba(255,154,74,0.35)" stroke-width="1" stroke-dasharray="12 10" fill="none"></circle>
+        <circle cx="0" cy="0" r="8" fill="rgba(255,154,74,0.75)"></circle>
       </g>
     </svg>
     <div class="ahx-info-card ahx-info-bulk">
@@ -350,12 +432,13 @@
 
       <!-- Right Column -->
       <div class="col-lg-6 text-center ahx-visual">
+        <div class="ahx-visual-copy">
             <h2 class="fw-bold mb-3">
               <span class="text-white">Pakistan's #1 Trusted</span><br>
               <span style="color: #ff7b00;">B2B Wholesale Marketplace</span>
             </h2>
-
-        <img src="{{ asset('assets/images/shake.png') }}" alt="Wholesaler Network" class="img-fluid" style="max-height: 400px;">
+            <p class="text-light small mb-0">Verified suppliers, protected trade, and nationwide wholesale delivery.</p>
+        </div>
       </div>
 
     </div>
