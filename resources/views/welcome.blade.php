@@ -89,14 +89,29 @@
         z-index: 5;
         min-height: 500px;
         display: flex;
-        align-items: flex-start;
-        justify-content: center;
+        align-items: flex-end;
+        justify-content: flex-end;
       }
       .ahx-visual-copy {
         position: relative;
         z-index: 5;
+        max-width: 380px;
+        margin: 360px 18px 0 auto;
+        padding: 18px 22px 0;
+        text-align: center;
+      }
+      .ahx-visual-copy h2 {
+        font-size: clamp(26px, 2.6vw, 40px);
+        line-height: 1.08;
+        letter-spacing: -.03em;
+        margin-bottom: 12px;
+      }
+      .ahx-visual-copy p {
         max-width: 320px;
-        padding-top: 28px;
+        margin: 0 auto;
+        color: rgba(245, 245, 247, 0.74);
+        font-size: 14px;
+        line-height: 1.65;
       }
       .ahx-sphere-wrap {
         position: absolute;
@@ -210,6 +225,7 @@
       @keyframes ahx-live { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .65; transform: scale(1.25); } }
       @media (max-width: 1199px) {
         .ahx-sphere-wrap { right: -40px; top: 8px; width: 480px; height: 480px; opacity: .55; }
+        .ahx-visual-copy { max-width: 350px; margin-top: 310px; margin-right: 0; }
         .ahx-shape-diamond, .ahx-shape-ring, .ahx-shape-triangle, .ahx-shape-hex { opacity: .7; }
       }
       @media (max-width: 991.98px) {
@@ -217,8 +233,8 @@
         .ahx-copy { text-align: center; }
         .ahx-copy p { margin-left: auto; margin-right: auto; }
         .ahx-chip-row, .ahx-stats { justify-content: center; }
-        .ahx-visual { min-height: 360px; margin-top: 36px; }
-        .ahx-visual-copy { padding-top: 0; }
+        .ahx-visual { min-height: 460px; margin-top: 36px; justify-content: center; }
+        .ahx-visual-copy { max-width: 420px; margin: 295px auto 0; padding-top: 0; }
         .ahx-sphere-wrap { right: 50%; transform: translateX(50%); top: 0; width: 420px; height: 420px; opacity: .38; }
         .ahx-info-card { display: none; }
       }
@@ -227,6 +243,9 @@
         .ahx-stats { gap: 24px; flex-wrap: wrap; }
         .ahx-chip-row { gap: 8px; }
         .ahx-chip { font-size: 12px; padding: 7px 12px; }
+        .ahx-visual { min-height: auto; margin-top: 20px; }
+        .ahx-visual-copy { margin: 0 auto; padding: 0 10px; }
+        .ahx-visual-copy h2 { font-size: clamp(24px, 7vw, 32px); }
         .ahx-sphere-wrap, .ahx-shape { display: none; }
       }
 
