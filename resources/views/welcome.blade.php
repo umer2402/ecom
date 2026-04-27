@@ -50,6 +50,196 @@
         background: rgba(255,255,255,.95); box-shadow: 0 0 6px rgba(255,255,255,.55);
         animation: ahx-twinkle ease-in-out infinite;
       }
+      .navbar-custom .container-fluid {
+        gap: 16px;
+        padding: 14px 18px;
+      }
+      .navbar-custom .navbar-collapse {
+        justify-content: flex-end;
+      }
+      .right-options {
+        gap: 12px;
+        margin-left: auto;
+      }
+      .right-options .form-select {
+        width: auto;
+        min-width: 96px;
+      }
+      .hero-search-band {
+        position: relative;
+        z-index: 8;
+        padding: 18px 0 10px;
+        background:
+          radial-gradient(circle at 12% 12%, rgba(255, 122, 26, 0.22), transparent 20%),
+          linear-gradient(180deg, #0d0f13 0%, #11151d 100%);
+      }
+      .hero-search-shell {
+        position: relative;
+        overflow: hidden;
+        padding: 26px 28px 22px;
+        border-radius: 30px;
+        background:
+          linear-gradient(145deg, rgba(255,255,255,0.97) 0%, rgba(255,244,233,0.98) 55%, rgba(255,238,221,0.99) 100%);
+        border: 1px solid rgba(255, 145, 44, 0.18);
+        box-shadow:
+          0 26px 58px rgba(0, 0, 0, 0.25),
+          inset 0 1px 0 rgba(255,255,255,0.9);
+      }
+      .hero-search-shell::before,
+      .hero-search-shell::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero-search-shell::before {
+        width: 230px;
+        height: 230px;
+        top: -120px;
+        right: -70px;
+        background: radial-gradient(circle, rgba(255, 122, 26, 0.16) 0%, rgba(255, 122, 26, 0) 70%);
+      }
+      .hero-search-shell::after {
+        width: 180px;
+        height: 180px;
+        left: -40px;
+        bottom: -80px;
+        background: radial-gradient(circle, rgba(255, 214, 172, 0.55) 0%, rgba(255, 214, 172, 0) 72%);
+      }
+      .hero-search-intro,
+      .hero-search-form,
+      .hero-search-tags {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-search-intro {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px 28px;
+        margin-bottom: 20px;
+      }
+      .hero-search-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 122, 26, 0.12);
+        color: #ba5700;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .hero-search-title {
+        margin: 0;
+        color: #1b130c;
+        font-size: clamp(26px, 2.4vw, 36px);
+        line-height: 1.08;
+        letter-spacing: -.03em;
+      }
+      .hero-search-intro p {
+        max-width: 360px;
+        margin: 0;
+        color: #71523a;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+      .hero-search-form {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: center;
+      }
+      .hero-search-field {
+        position: relative;
+      }
+      .hero-search-field-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ff7a1a;
+        font-size: 17px;
+        pointer-events: none;
+      }
+      .hero-search-select,
+      .hero-search-input {
+        width: 100%;
+        height: 62px;
+        border: 1px solid rgba(255, 145, 44, 0.18);
+        border-radius: 18px;
+        background: rgba(255,255,255,0.84);
+        color: #20150d;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 0 18px 0 50px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
+        transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      }
+      .hero-search-select:focus,
+      .hero-search-input:focus {
+        outline: none;
+        border-color: rgba(255, 122, 26, 0.45);
+        box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
+        transform: translateY(-1px);
+      }
+      .hero-search-button {
+        height: 62px;
+        border: none;
+        border-radius: 18px;
+        padding: 0 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #ff7a1a 0%, #ff9a43 100%);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: .01em;
+        box-shadow: 0 18px 34px rgba(255, 122, 26, 0.24);
+        transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      }
+      .hero-search-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 24px 36px rgba(255, 122, 26, 0.28);
+        filter: saturate(1.05);
+      }
+      .hero-search-tags {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .hero-search-tag-label {
+        color: #76553d;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .hero-search-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.72);
+        border: 1px solid rgba(255, 145, 44, 0.15);
+        color: #2c1b11;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
+      }
+      .hero-search-tag:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 122, 26, 0.4);
+        background: rgba(255, 245, 236, 0.98);
+        color: #c95f00;
+      }
       .ahx-copy { position: relative; z-index: 5; }
       .ahx-trust-pill {
         display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.05);
@@ -224,11 +414,37 @@
       @keyframes ahx-float-d { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-10px,-12px); } }
       @keyframes ahx-live { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .65; transform: scale(1.25); } }
       @media (max-width: 1199px) {
+        .hero-search-form {
+          grid-template-columns: 220px minmax(0, 1fr);
+        }
+        .hero-search-button {
+          grid-column: 1 / -1;
+        }
         .ahx-sphere-wrap { right: -40px; top: 8px; width: 480px; height: 480px; opacity: .55; }
         .ahx-visual-copy { max-width: 350px; margin-top: 310px; margin-right: 0; }
         .ahx-shape-diamond, .ahx-shape-ring, .ahx-shape-triangle, .ahx-shape-hex { opacity: .7; }
       }
       @media (max-width: 991.98px) {
+        .hero-search-band {
+          padding-top: 14px;
+        }
+        .hero-search-shell {
+          padding: 22px 20px 18px;
+          border-radius: 24px;
+        }
+        .hero-search-intro {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .hero-search-intro p {
+          max-width: none;
+        }
+        .hero-search-form {
+          grid-template-columns: 1fr;
+        }
+        .hero-search-button {
+          width: 100%;
+        }
         .animated-market-hero { min-height: auto; padding-top: 56px; padding-bottom: 110px; }
         .ahx-copy { text-align: center; }
         .ahx-copy p { margin-left: auto; margin-right: auto; }
@@ -239,6 +455,31 @@
         .ahx-info-card { display: none; }
       }
       @media (max-width: 767.98px) {
+        .navbar-custom .container-fluid {
+          padding: 12px 14px;
+        }
+        .right-options {
+          margin-left: 0;
+          justify-content: flex-start;
+        }
+        .right-options .form-select {
+          min-width: 88px;
+        }
+        .hero-search-shell {
+          padding: 20px 16px 16px;
+        }
+        .hero-search-title {
+          font-size: 24px;
+        }
+        .hero-search-select,
+        .hero-search-input,
+        .hero-search-button {
+          height: 56px;
+          border-radius: 16px;
+        }
+        .hero-search-tags {
+          gap: 8px;
+        }
         .animated-market-hero { padding-left: 18px; padding-right: 18px; min-height: auto; }
         .ahx-stats { gap: 24px; flex-wrap: wrap; }
         .ahx-chip-row { gap: 8px; }
@@ -847,19 +1088,6 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <!-- Search area -->
-        <div class="d-flex flex-grow-1 align-items-center mx-lg-3 my-3 my-lg-0 search-bar">
-          <select class="form-select w-auto me-2">
-            <option>Categories</option>
-            @foreach($categories as $category)
-              <option>{{ $category->categoryName }}</option>
-            @endforeach
-          </select>
-
-          <input class="form-control me-2" type="search" placeholder="Search for products, suppliers...">
-          <button class="search-btn">Search</button>
-        </div>
-
         <!-- Right side buttons -->
         <div class="d-flex align-items-center flex-wrap right-options">
           <a href="{{ auth()->check() ? route('home') : route('user.login') }}"><button class="create-account-btn me-2 mb-2 mb-lg-0">Create Account</button></a>
@@ -894,6 +1122,54 @@
     <a href="#">Who We Help</a>
     <a href="#">Learn</a>
   </div>
+  <section class="hero-search-band">
+    <div class="container">
+      <div class="hero-search-shell">
+        <div class="hero-search-intro">
+          <div>
+            <span class="hero-search-kicker">
+              <i class="bi bi-stars"></i>
+              Discover Faster
+            </span>
+            <h2 class="hero-search-title">Find products, suppliers and wholesale deals in one place</h2>
+          </div>
+          <p>Choose a category, search what you need, and jump straight into Pakistan’s verified B2B marketplace.</p>
+        </div>
+
+        <form class="hero-search-form" id="heroSearchForm" action="{{ route('stores.index') }}" method="get">
+          <div class="hero-search-field">
+            <span class="hero-search-field-icon"><i class="bi bi-grid"></i></span>
+            <select class="hero-search-select" id="heroCategorySelect" aria-label="Browse by category">
+              <option value="">Browse categories</option>
+              @foreach($categories as $category)
+                <option value="{{ route('categories.show', $category->categoryId) }}">{{ $category->categoryName }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="hero-search-field">
+            <span class="hero-search-field-icon"><i class="bi bi-search"></i></span>
+            <input class="hero-search-input" type="search" name="q" placeholder="Search for products, suppliers, brands or offers">
+          </div>
+
+          <button class="hero-search-button" type="submit">
+            <i class="bi bi-arrow-up-right-circle"></i>
+            Explore Market
+          </button>
+        </form>
+
+        <div class="hero-search-tags">
+          <span class="hero-search-tag-label">Popular:</span>
+          @foreach($categories->take(5) as $category)
+            <a href="{{ route('categories.show', $category->categoryId) }}" class="hero-search-tag">
+              <i class="bi bi-box-seam"></i>
+              {{ $category->categoryName }}
+            </a>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </section>
 @php
   $headerStars = [];
   for ($i = 1; $i <= 70; $i++) {
@@ -2093,6 +2369,22 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  const heroSearchForm = document.getElementById('heroSearchForm');
+  const heroCategorySelect = document.getElementById('heroCategorySelect');
+
+  if (heroSearchForm && heroCategorySelect) {
+    heroSearchForm.addEventListener('submit', function (event) {
+      const selectedCategoryUrl = heroCategorySelect.value;
+      const searchInput = heroSearchForm.querySelector('input[name="q"]');
+      const searchTerm = searchInput ? searchInput.value.trim() : '';
+
+      if (selectedCategoryUrl && searchTerm === '') {
+        event.preventDefault();
+        window.location.href = selectedCategoryUrl;
+      }
+    });
+  }
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
     return;
   }
