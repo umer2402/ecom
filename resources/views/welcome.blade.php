@@ -10,9 +10,156 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 
     <link href="{{ asset('assets/css/homestyle.css') }}" rel="stylesheet">
+    <style>
+      .animated-market-hero {
+        --ahx-bg: #0a0a0b;
+        --ahx-bg-2: #131318;
+        --ahx-accent: #ff7a1a;
+        --ahx-accent-soft: #ff9a4a;
+        --ahx-text: #f5f5f7;
+        --ahx-muted: #b2b2bc;
+        --ahx-border: rgba(255,255,255,.08);
+        position: relative;
+        min-height: 780px;
+        overflow: hidden;
+        color: var(--ahx-text);
+        background:
+          radial-gradient(circle at 15% 20%, rgba(255, 122, 26, 0.18), transparent 28%),
+          radial-gradient(circle at 80% 35%, rgba(255, 122, 26, 0.16), transparent 30%),
+          linear-gradient(180deg, var(--ahx-bg) 0%, var(--ahx-bg-2) 100%);
+        font-family: "Space Grotesk", "Plus Jakarta Sans", "Inter", sans-serif;
+        padding-top: 84px;
+        padding-bottom: 150px;
+      }
+
+      .animated-market-hero .container { position: relative; z-index: 4; }
+      .ahx-radial, .ahx-starfield, .ahx-fade, .ahx-sphere-wrap, .ahx-shape { pointer-events: none; }
+      .ahx-radial {
+        position: absolute; inset: 0; z-index: 1;
+        background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255, 122, 26, 0.08) 0%, transparent 70%);
+      }
+      .ahx-starfield { position: absolute; inset: 0; z-index: 2; }
+      .ahx-star {
+        position: absolute; display: block; border-radius: 50%;
+        background: rgba(255,255,255,.95); box-shadow: 0 0 6px rgba(255,255,255,.55);
+        animation: ahx-twinkle ease-in-out infinite;
+      }
+      .ahx-copy { position: relative; z-index: 5; }
+      .ahx-trust-pill {
+        display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.05);
+        border: 1px solid var(--ahx-border); padding: 8px 14px; border-radius: 999px;
+        font-size: 13px; margin-bottom: 24px; backdrop-filter: blur(10px);
+        animation: ahx-fade-up .7s ease-out .1s both;
+      }
+      .ahx-copy h1 {
+        font-size: clamp(42px, 5vw, 72px); line-height: 1.02; letter-spacing: -.03em;
+        color: #fff; margin-bottom: 20px; animation: ahx-fade-up .8s ease-out .2s both;
+      }
+      .ahx-copy p {
+        color: var(--ahx-muted); font-size: 17px; line-height: 1.7; max-width: 560px;
+        margin-bottom: 30px; animation: ahx-fade-up .8s ease-out .35s both;
+      }
+      .ahx-copy .btn { box-shadow: 0 14px 34px rgba(0, 0, 0, .22); }
+      .ahx-chip-row {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px;
+        animation: ahx-fade-up .8s ease-out .55s both;
+      }
+      .ahx-chip-label {
+        display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ahx-muted);
+      }
+      .ahx-chip {
+        text-decoration: none; color: #fff; background: rgba(255,255,255,.04);
+        border: 1px solid var(--ahx-border); padding: 8px 14px; border-radius: 999px;
+        font-size: 13px; transition: all .2s ease;
+      }
+      .ahx-chip:hover {
+        color: var(--ahx-accent); border-color: rgba(255, 122, 26, .45); background: rgba(255, 122, 26, .1);
+      }
+      .ahx-stats { display: flex; gap: 42px; margin-top: 52px; animation: ahx-fade-up .8s ease-out .7s both; }
+      .ahx-stat-num { font-size: 30px; line-height: 1; font-weight: 800; color: #fff; }
+      .ahx-stat-label { color: var(--ahx-muted); font-size: 11px; letter-spacing: .14em; margin-top: 8px; }
+      .ahx-visual { position: relative; z-index: 5; min-height: 500px; }
+      .ahx-visual img {
+        position: relative; z-index: 3; max-height: 430px; filter: drop-shadow(0 20px 45px rgba(0,0,0,.4));
+      }
+      .ahx-sphere-wrap { position: absolute; right: -65px; top: 50px; width: 560px; height: 560px; z-index: 3; }
+      .ahx-sphere-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 34px rgba(255, 122, 26, .25)); }
+      .ahx-sphere-rotate { transform-origin: center; animation: ahx-sphere 30s linear infinite; }
+      .ahx-info-card {
+        position: absolute; z-index: 4; background: rgba(20, 20, 24, .78);
+        border: 1px solid rgba(255, 122, 26, .25); border-radius: 16px; padding: 12px 16px;
+        backdrop-filter: blur(14px); box-shadow: 0 12px 34px rgba(0,0,0,.35); text-align: left;
+      }
+      .ahx-info-card small {
+        display: block; color: var(--ahx-muted); font-size: 11px; letter-spacing: .1em; margin-bottom: 4px;
+      }
+      .ahx-info-card strong { color: var(--ahx-accent-soft); font-size: 16px; font-weight: 700; }
+      .ahx-info-supplier { top: 25%; left: 10%; min-width: 210px; animation: ahx-float-a 7s ease-in-out infinite; }
+      .ahx-info-bulk { top: 15%; right: 8%; animation: ahx-float-b 6.5s ease-in-out infinite; }
+      .ahx-info-live { bottom: 16%; left: 16%; animation: ahx-float-c 7.5s ease-in-out infinite; }
+      .ahx-info-delivery { bottom: 22%; right: 2%; animation: ahx-float-d 6s ease-in-out infinite; }
+      .ahx-live-dot {
+        width: 7px; height: 7px; border-radius: 50%; display: inline-block; background: #22c55e;
+        box-shadow: 0 0 9px rgba(34,197,94,.85); margin-right: 6px; animation: ahx-live 1.5s ease-in-out infinite;
+      }
+      .ahx-shape { position: absolute; z-index: 3; filter: drop-shadow(0 0 16px rgba(255,122,26,.4)); }
+      .ahx-shape-diamond { top: 31%; left: 52%; width: 84px; height: 84px; animation: ahx-drift-1 12s ease-in-out infinite; }
+      .ahx-shape-diamond::before {
+        content: ""; position: absolute; inset: 0; transform: rotate(45deg); border-radius: 12px;
+        background: linear-gradient(135deg, #ff8a3d 0%, #ff5a00 60%, #8b2e00 100%);
+        box-shadow: inset 0 -10px 18px rgba(0,0,0,.25), inset 0 10px 16px rgba(255,255,255,.1);
+      }
+      .ahx-shape-ring {
+        top: 64%; left: 57%; width: 72px; height: 72px; border-radius: 50%;
+        border: 3px solid rgba(255, 122, 26, .9); box-shadow: 0 0 24px rgba(255,122,26,.45), inset 0 0 15px rgba(255,122,26,.15);
+        animation: ahx-drift-2 11s ease-in-out infinite;
+      }
+      .ahx-shape-triangle { top: 21%; left: 69%; width: 64px; height: 64px; animation: ahx-drift-3 13s ease-in-out infinite; }
+      .ahx-shape-triangle svg, .ahx-shape-hex svg { width: 100%; height: 100%; }
+      .ahx-shape-hex { top: 58%; left: 45%; width: 72px; height: 72px; animation: ahx-drift-4 10s ease-in-out infinite; }
+      .ahx-fade {
+        position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: 4;
+        background: linear-gradient(to bottom, rgba(10,10,11,0) 0%, rgba(10,10,11,.7) 52%, #ffffff 100%);
+      }
+      @keyframes ahx-twinkle { 0%, 100% { opacity: .15; transform: scale(.8); } 50% { opacity: .95; transform: scale(1.08); } }
+      @keyframes ahx-fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes ahx-sphere { 0% { transform: scaleX(1); } 25% { transform: scaleX(.08); } 50% { transform: scaleX(-1); } 75% { transform: scaleX(-.08); } 100% { transform: scaleX(1); } }
+      @keyframes ahx-drift-1 { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(20px,-20px) rotate(10deg); } }
+      @keyframes ahx-drift-2 { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-18px,12px); } }
+      @keyframes ahx-drift-3 { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(12px,18px) rotate(120deg); } }
+      @keyframes ahx-drift-4 { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-22px,18px) rotate(180deg); } }
+      @keyframes ahx-float-a { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-6px,-12px); } }
+      @keyframes ahx-float-b { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(8px,-10px); } }
+      @keyframes ahx-float-c { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(8px,-8px); } }
+      @keyframes ahx-float-d { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-10px,-12px); } }
+      @keyframes ahx-live { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .65; transform: scale(1.25); } }
+      @media (max-width: 1199px) {
+        .ahx-sphere-wrap { right: -140px; width: 480px; height: 480px; opacity: .55; }
+        .ahx-shape-diamond, .ahx-shape-ring, .ahx-shape-triangle, .ahx-shape-hex { opacity: .7; }
+      }
+      @media (max-width: 991.98px) {
+        .animated-market-hero { min-height: auto; padding-top: 56px; padding-bottom: 110px; }
+        .ahx-copy { text-align: center; }
+        .ahx-copy p { margin-left: auto; margin-right: auto; }
+        .ahx-chip-row, .ahx-stats { justify-content: center; }
+        .ahx-visual { min-height: 360px; margin-top: 36px; }
+        .ahx-sphere-wrap { right: 50%; transform: translateX(50%); top: 0; width: 420px; height: 420px; opacity: .38; }
+        .ahx-info-card { display: none; }
+      }
+      @media (max-width: 767.98px) {
+        .animated-market-hero { padding-left: 18px; padding-right: 18px; min-height: auto; }
+        .ahx-stats { gap: 24px; flex-wrap: wrap; }
+        .ahx-chip-row { gap: 8px; }
+        .ahx-chip { font-size: 12px; padding: 7px 12px; }
+        .ahx-sphere-wrap, .ahx-shape { display: none; }
+      }
+    </style>
 </head>
 <body>
 
@@ -74,28 +221,135 @@
     <a href="#">Who We Help</a>
     <a href="#">Learn</a>
   </div>
+@php
+  $headerStars = [];
+  for ($i = 1; $i <= 70; $i++) {
+      $x = fmod(abs(sin($i * 12.9898) * 43758.5453), 1) * 100;
+      $y = fmod(abs(sin($i * 78.233) * 43758.5453), 1) * 100;
+      $s = fmod(abs(sin($i * 31.77) * 43758.5453), 1);
+      $headerStars[] = [
+          'left' => round($x, 2),
+          'top' => round($y, 2),
+          'size' => round(1 + ($s * 2), 2),
+          'delay' => round($s * 5, 2),
+          'duration' => round(2 + ($x / 100) * 4, 2),
+      ];
+  }
+@endphp
 <!-- Hero Section -->
-<section class="hero-section py-5 px-3 px-md-5">
+<section class="hero-section animated-market-hero px-3 px-md-5">
+  <div class="ahx-radial"></div>
+  <div class="ahx-starfield" aria-hidden="true">
+    @foreach($headerStars as $star)
+      <span class="ahx-star" style="left: {{ $star['left'] }}%; top: {{ $star['top'] }}%; width: {{ $star['size'] }}px; height: {{ $star['size'] }}px; animation-delay: {{ $star['delay'] }}s; animation-duration: {{ $star['duration'] }}s;"></span>
+    @endforeach
+  </div>
+  <div class="ahx-shape ahx-shape-diamond" aria-hidden="true"></div>
+  <div class="ahx-shape ahx-shape-ring" aria-hidden="true"></div>
+  <div class="ahx-shape ahx-shape-triangle" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <polygon points="50,10 90,85 10,85" fill="none" stroke="rgba(255,122,26,0.82)" stroke-width="1.5"></polygon>
+    </svg>
+  </div>
+  <div class="ahx-shape ahx-shape-hex" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="welcomeHexGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff8a3d"></stop>
+          <stop offset="100%" stop-color="#c44a00"></stop>
+        </linearGradient>
+      </defs>
+      <polygon points="50,5 92,27 92,73 50,95 8,73 8,27" fill="url(#welcomeHexGradient)" stroke="rgba(255,122,26,0.92)" stroke-width="1.5"></polygon>
+    </svg>
+  </div>
+  <div class="ahx-sphere-wrap" aria-hidden="true">
+    <svg viewBox="-220 -220 440 440" class="ahx-sphere-svg">
+      <defs>
+        <radialGradient id="welcomeSphereGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,107,26,0.25)"></stop>
+          <stop offset="60%" stop-color="rgba(255,107,26,0.05)"></stop>
+          <stop offset="100%" stop-color="rgba(255,107,26,0)"></stop>
+        </radialGradient>
+      </defs>
+      <circle cx="0" cy="0" r="200" fill="url(#welcomeSphereGlow)"></circle>
+      <g class="ahx-sphere-rotate">
+        <ellipse cx="0" cy="0" rx="200" ry="200" stroke="rgba(255,122,26,0.75)" stroke-width="1" fill="none"></ellipse>
+        <ellipse cx="0" cy="0" rx="184.78" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="0" rx="141.42" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="0" rx="76.54" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="0" rx=".5" ry="200" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="0" rx="173.21" ry="100" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="-100" rx="173.21" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="100" rx="173.21" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="-173.21" rx="100" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+        <ellipse cx="0" cy="173.21" rx="100" ry=".5" stroke="rgba(255,122,26,0.55)" stroke-width=".8" fill="none"></ellipse>
+      </g>
+    </svg>
+    <div class="ahx-info-card ahx-info-bulk">
+      <small>Bulk Discount</small>
+      <strong>Up to 60% OFF</strong>
+    </div>
+    <div class="ahx-info-card ahx-info-supplier">
+      <small>Verified Supplier</small>
+      <div class="text-white fw-semibold mb-1">Karachi Textiles Co.</div>
+      <strong>Rs. 280 / piece</strong>
+    </div>
+    <div class="ahx-info-card ahx-info-live">
+      <small><span class="ahx-live-dot"></span>Live Now</small>
+      <strong>12,480 buyers</strong>
+    </div>
+    <div class="ahx-info-card ahx-info-delivery">
+      <small>Nationwide Delivery</small>
+      <strong>Fast & Protected</strong>
+    </div>
+  </div>
   <div class="container">
     <div class="row align-items-center">
       
       <!-- Left Column -->
-      <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
-        <h1 class="fw-bold mb-3" style="color: #ff7b00;">
+      <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0 ahx-copy">
+        <div class="ahx-trust-pill">
+          <i class="bi bi-shield-check text-warning"></i>
+          Your Money &amp; Orders, Fully Protected
+        </div>
+        <h1 class="fw-bold mb-3">
           Connecting Wholesalers and Retailers –
-          <span class="text-white">Smarter, Faster, Easier</span>
+          <span class="d-block" style="color: #ff7b00;">Smarter, Faster, Easier</span>
         </h1>
-        <p class="text-light mb-4">
+        <p class="mb-4">
           Grow your business by reaching verified buyers and trusted suppliers across the country.
         </p>
         <div class="d-flex justify-content-center justify-content-lg-start gap-3">
           <a href="{{ route('stores.index') }}" class="btn btn-warning fw-semibold px-4 py-2 rounded-3">Start Buying</a>
           <a href="/seller" class="btn btn-light fw-semibold px-4 py-2 rounded-3">Join as Wholesaler</a>
         </div>
+        <div class="ahx-chip-row">
+          <span class="ahx-chip-label">
+            <i class="bi bi-graph-up-arrow text-warning"></i>
+            Trending:
+          </span>
+          @foreach($categories->take(6) as $category)
+            <a href="{{ route('categories.show', $category->categoryId) }}" class="ahx-chip">{{ $category->categoryName }}</a>
+          @endforeach
+        </div>
+        <div class="ahx-stats justify-content-center justify-content-lg-start">
+          <div>
+            <div class="ahx-stat-num">50K+</div>
+            <div class="ahx-stat-label">VERIFIED SUPPLIERS</div>
+          </div>
+          <div>
+            <div class="ahx-stat-num">2M+</div>
+            <div class="ahx-stat-label">BULK PRODUCTS</div>
+          </div>
+          <div>
+            <div class="ahx-stat-num">100%</div>
+            <div class="ahx-stat-label">TRADE ASSURANCE</div>
+          </div>
+        </div>
       </div>
 
       <!-- Right Column -->
-      <div class="col-lg-6 text-center">
+      <div class="col-lg-6 text-center ahx-visual">
             <h2 class="fw-bold mb-3">
               <span class="text-white">Pakistan's #1 Trusted</span><br>
               <span style="color: #ff7b00;">B2B Wholesale Marketplace</span>
@@ -106,6 +360,7 @@
 
     </div>
   </div>
+  <div class="ahx-fade"></div>
 </section>
 <!-- ISO Certified Section -->
 <section class="iso-section py-5 bg-light text-center">
