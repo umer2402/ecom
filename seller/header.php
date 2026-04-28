@@ -2,14 +2,22 @@
 session_start();
 if(!isset($_SESSION['SELLERSTORE'])){ 
     header("location: login.php");
-} 
+    exit;
+}
 include "db.php";
 
 
-$sellerId=$_SESSION['sellerId'] ;
-$getStore=mysqli_query($con, "SELECT * FROM stores WHERE sellerId='$sellerId'");
-$get=mysqli_fetch_array($getStore);
-$storeId=$get['storeId'];
+$sellerId = (int) ($_SESSION['sellerId'] ?? 0);
+$storeId = (int) ($_SESSION['storeId'] ?? 0);
+
+if ($sellerId > 0 && $storeId <= 0) {
+    $getStore = mysqli_query($con, "SELECT storeId FROM stores WHERE sellerId='$sellerId' LIMIT 1");
+
+    if ($getStore && ($get = mysqli_fetch_array($getStore))) {
+        $storeId = (int) $get['storeId'];
+        $_SESSION['storeId'] = $storeId;
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -32,49 +32,49 @@ if ($stmt->num_rows > 0) {
     $stmt->bind_result($sellerId, $hashedPassword, $sellerName, $status, $verified);
     $stmt->fetch();
 
-    // Verify the password
-    if (password_verify($password, $hashedPassword)) {
+    // Support both modern hashed passwords and legacy plain-text values.
+    $isValidPassword = password_verify($password, (string) $hashedPassword)
+        || hash_equals((string) $hashedPassword, $password);
+
+    if ($isValidPassword) {
         // Check if the email is verified and status is active
-        if ($status == "active" && $verified == 'Verified') {
+        if (strcasecmp((string) $status, "active") === 0 && strcasecmp((string) $verified, 'Verified') === 0) {
             // Start the session and set the user's session variables
             session_regenerate_id(true);
             $_SESSION['sellerEmail'] = $email;
             $_SESSION['SELLERSTORE'] = $sellerName;
             $_SESSION['sellerId'] = $sellerId;
+            
+            $storeStmt = $con->prepare("SELECT storeId FROM stores WHERE sellerId = ? LIMIT 1");
+            if ($storeStmt) {
+                $storeStmt->bind_param("i", $sellerId);
+                $storeStmt->execute();
+                $storeStmt->bind_result($storeId);
 
-            // Retrieve the storeId from the stores table
-            // $storeStmt = $con->prepare("SELECT storeId FROM stores WHERE sellerId = ?");
-            // $storeStmt->bind_param("i", $sellerId);
-            // $storeStmt->execute();
-            // $storeStmt->store_result();
+                if ($storeStmt->fetch()) {
+                    $_SESSION['storeId'] = $storeId;
+                } else {
+                    unset($_SESSION['storeId']);
+                }
 
-            // // Check if the store exists for the seller
-            // if ($storeStmt->num_rows > 0) {
-            //     $storeStmt->bind_result($storeId);
-            //     $storeStmt->fetch();
-
-            //     // Set the storeId in session
-            //     $_SESSION['storeId'] = $storeId;
-            // } else {
-            //     header("location: ../login.php?msg=Error: No store found for this seller.");
-            //     exit;
-            // }
-
-            // $storeStmt->close();
+                $storeStmt->close();
+            }
 
             // Redirect to the dashboard or the page the user wants to access
             header("Location: ../index.php");
             exit;
         } else {
             header("location: ../login.php?msg=Error: Your account is not verified or is inactive.");
-            
+            exit;
         }
     } else {
         header("location: ../login.php?msg=Error: Incorrect password.");
+        exit;
     }
 } else {
     
     header("location: ../login.php?msg=Error: No user found with that email address.");
+    exit;
 }
 
 $stmt->close();

@@ -7,9 +7,14 @@ use PHPMailer\PHPMailer\Exception;
 
 include "../db.php";
 
-$sellerName = $_POST['sellerName'];
-$sellerEmail = $_POST['sellerEmail'];
-$sellerPass = $_POST['sellerPass'];
+$sellerName = trim((string) ($_POST['sellerName'] ?? ''));
+$sellerEmail = filter_var(trim((string) ($_POST['sellerEmail'] ?? '')), FILTER_VALIDATE_EMAIL);
+$sellerPass = (string) ($_POST['sellerPass'] ?? '');
+
+if ($sellerName === '' || !$sellerEmail || $sellerPass === '') {
+    header("location: ../signup.php?msg=Please fill in all required fields.");
+    exit;
+}
 
 // Generate a verification key
 $verificationKey = md5(uniqid(rand(), true));
@@ -29,16 +34,18 @@ $emailCheckStmt->execute();
 $emailCheckStmt->store_result();
 
 if ($emailCheckStmt->num_rows > 0) {
-    echo "Error: The email address is already registered.";
+    header("location: ../signup.php?msg=The email address is already registered.");
+    exit;
 } else {
-    // Prepare and bind for inserting new seller
-    $stmt = $con->prepare("INSERT INTO sellers (sellerName, sellerEmail, sellerPass, verificationKey) VALUES (?, ?, ?, ?)");
+    // Email verification sending is disabled, so create an active verified seller
+    // to keep signup/login usable on the live custom PHP seller panel.
+    $stmt = $con->prepare("INSERT INTO sellers (sellerName, sellerEmail, sellerPass, verificationKey, sellerStatus, verificationStatus) VALUES (?, ?, ?, ?, 'active', 'Verified')");
     $stmt->bind_param("ssss", $sellerName, $sellerEmail, $hashedPassword, $verificationKey);
 
     // Execute the statement
     if ($stmt->execute()) {
         // Create a verification link
-        $verificationLink = "https://alibaba.softobook.com/seller/verify.php?key=$verificationKey&email=$sellerEmail";
+        $verificationLink = "https://hellodiscounters.com/seller/verify.php?key=$verificationKey&email=$sellerEmail";
         
         /*
         // Send verification email using PHPMailer
@@ -75,9 +82,11 @@ if ($emailCheckStmt->num_rows > 0) {
         }
         */
 
-        header("location: ../signup.php?msg=You are registered successfully.");
+        header("location: ../login.php?msg=Your seller account has been created. Please sign in.");
+        exit;
     } else {
-        echo "Error: " . $stmt->error;
+        header("location: ../signup.php?msg=Unable to create seller account right now.");
+        exit;
     }
 
     $stmt->close();

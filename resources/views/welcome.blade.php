@@ -1214,7 +1214,7 @@
         </p>
         <div class="d-flex justify-content-center justify-content-lg-start gap-3">
           <a href="{{ route('stores.index') }}" class="btn btn-warning fw-semibold px-4 py-2 rounded-3">Start Buying</a>
-          <a href="/seller" class="btn btn-light fw-semibold px-4 py-2 rounded-3">Join as Wholesaler</a>
+          <a href="{{ url('/seller/login.php') }}" class="btn btn-light fw-semibold px-4 py-2 rounded-3">Join as Wholesaler</a>
         </div>
         <div class="ahx-chip-row">
           <span class="ahx-chip-label">
@@ -2301,11 +2301,11 @@
                 <h5>For Sellers</h5>
                 <p>Reach high-intent buyers, manage orders and grow your wholesale business.</p>
                 <ul class="market-footer-links">
-                    <li><a href="{{ url('/seller') }}">Become a Supplier</a></li>
-                    <li><a href="{{ url('/seller') }}">Start Dropshipping</a></li>
-                    <li><a href="{{ url('/seller') }}">Seller Guide</a></li>
-                    <li><a href="{{ url('/seller') }}">Profit Calculator</a></li>
-                    <li><a href="{{ url('/seller') }}">Supplier Help Center</a></li>
+                    <li><a href="{{ url('/seller/login.php') }}">Become a Supplier</a></li>
+                    <li><a href="{{ url('/seller/login.php') }}">Start Dropshipping</a></li>
+                    <li><a href="{{ url('/seller/login.php') }}">Seller Guide</a></li>
+                    <li><a href="{{ url('/seller/login.php') }}">Profit Calculator</a></li>
+                    <li><a href="{{ url('/seller/login.php') }}">Supplier Help Center</a></li>
                 </ul>
             </div>
 
