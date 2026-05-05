@@ -8,6 +8,36 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+
+$ensureWebsiteAccountTypeColumn = function (): void {
+    if (!Schema::hasTable('users') || Schema::hasColumn('users', 'account_type')) {
+        return;
+    }
+
+    Schema::table('users', function (Blueprint $table) {
+        $table->string('account_type', 30)->default('buyer')->after('password');
+    });
+
+    DB::table('users')
+        ->whereNull('account_type')
+        ->update(['account_type' => 'buyer']);
+};
+
+$resolveWebsiteUser = function (string $identifier) use ($ensureWebsiteAccountTypeColumn) {
+    $ensureWebsiteAccountTypeColumn();
+
+    $field = filter_var($identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+    $user = DB::table('users')
+        ->where($field, trim($identifier))
+        ->first();
+
+    if ($user && empty($user->account_type)) {
+        $user->account_type = 'buyer';
+    }
+
+    return [$user, $field];
+};
+
 Route::get('/', function () {
     
     $cats=DB::table('categories')->orderBy('categoryName')->get();
@@ -44,21 +74,28 @@ Route::get('user', function () {
     return view('userLogin');
 })->name('user.login');
 
+Route::get('dropshipper', function () {
+    if (Auth::check()) {
+        return redirect()->route('home');
+    }
+
+    return view('dropshipperLogin');
+})->name('dropshipper.login');
 
 
-Route::post('login', function(Request $request) {
+Route::post('login', function(Request $request) use ($resolveWebsiteUser) {
     $credentials = $request->validate([
         'username' => 'required|string',
         'password' => 'required|string',
     ]);
 
-    // Determine if username is email or username
-    $field = filter_var($credentials['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-    
-    // Manual authentication
-    $user = DB::table('users')
-                ->where($field, $credentials['username'])
-                ->first();
+    [$user] = $resolveWebsiteUser($credentials['username']);
+
+    if ($user && ($user->account_type ?? 'buyer') === 'dropshipper') {
+        return back()->withErrors([
+            'username' => 'This account is registered as a dropshipper. Please use the dropshipper login page.',
+        ])->withInput();
+    }
 
     if (!$user || !Hash::check($credentials['password'], $user->password)) {
         return back()->withErrors([
@@ -78,7 +115,9 @@ Route::post('/logout', function() {
     return redirect('/');
 })->name('logout');
 
-Route::post('register', function (Request $request) {
+Route::post('register', function (Request $request) use ($ensureWebsiteAccountTypeColumn) {
+    $ensureWebsiteAccountTypeColumn();
+
     // Validate the request
     $validated = $request->validate([
         'username' => 'required|string|max:255',
@@ -86,15 +125,19 @@ Route::post('register', function (Request $request) {
         'password' => 'required|string|min:8',
     ]);
 
-    // Check if username or email already exists
-    $userExists = DB::table('users')
+    $existingUser = DB::table('users')
         ->where('name', $validated['username'])
         ->orWhere('email', $validated['email'])
-        ->exists();
+        ->first();
 
-    if ($userExists) {
+    if ($existingUser) {
+        $existingType = empty($existingUser->account_type) ? 'buyer' : $existingUser->account_type;
+        $message = $existingType === 'dropshipper'
+            ? 'This email or username is already registered as a dropshipper account.'
+            : 'The username or email is already taken.';
+
         return back()->withErrors([
-            'email' => 'The username or email is already taken.',
+            'email' => $message,
         ])->withInput();
     }
 
@@ -103,6 +146,7 @@ Route::post('register', function (Request $request) {
         'name' => $validated['username'],
         'email' => $validated['email'],
         'password' => Hash::make($validated['password']),
+        'account_type' => 'buyer',
         'created_at' => now(),
         'updated_at' => now(),
     ]);
@@ -110,6 +154,68 @@ Route::post('register', function (Request $request) {
     // Redirect with success message
     return redirect()->route('user.login')->with('success', 'Registration successful! Login Please.');
 })->name('register');
+
+Route::post('dropshipper/login', function (Request $request) use ($resolveWebsiteUser) {
+    $credentials = $request->validateWithBag('dropshipperLogin', [
+        'username' => 'required|string',
+        'password' => 'required|string',
+    ]);
+
+    [$user] = $resolveWebsiteUser($credentials['username']);
+
+    if ($user && ($user->account_type ?? 'buyer') !== 'dropshipper') {
+        return back()->withErrors([
+            'username' => 'This account is registered as a buyer. Please use the buyer login page.',
+        ], 'dropshipperLogin')->withInput();
+    }
+
+    if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        return back()->withErrors([
+            'username' => 'The provided dropshipper credentials do not match our records.',
+        ], 'dropshipperLogin')->withInput();
+    }
+
+    Auth::loginUsingId($user->id, $request->has('rememberme'));
+
+    return redirect()->intended(route('home'))->with('success', 'Welcome back to your dropshipper account.');
+})->name('dropshipper.authenticate');
+
+Route::post('dropshipper/register', function (Request $request) use ($ensureWebsiteAccountTypeColumn) {
+    $ensureWebsiteAccountTypeColumn();
+
+    $validated = $request->validateWithBag('dropshipperRegister', [
+        'username' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'password' => 'required|string|min:8',
+    ]);
+
+    $existingUser = DB::table('users')
+        ->where('name', $validated['username'])
+        ->orWhere('email', $validated['email'])
+        ->first();
+
+    if ($existingUser) {
+        $existingType = empty($existingUser->account_type) ? 'buyer' : $existingUser->account_type;
+        $message = $existingType === 'dropshipper'
+            ? 'This email or username is already registered as a dropshipper account.'
+            : 'This email or username is already being used by a buyer account.';
+
+        return back()->withErrors([
+            'email' => $message,
+        ], 'dropshipperRegister')->withInput();
+    }
+
+    DB::table('users')->insert([
+        'name' => $validated['username'],
+        'email' => $validated['email'],
+        'password' => Hash::make($validated['password']),
+        'account_type' => 'dropshipper',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return redirect()->route('dropshipper.login')->with('success', 'Dropshipper registration successful! Please sign in.');
+})->name('dropshipper.register');
 
 Route::post('newsletter/subscribe', function (Request $request) {
     $validated = $request->validate([

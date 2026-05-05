@@ -32,6 +32,13 @@
     <div class="container">
         <div class="my-account">
             <div class="row">
+                <div class="col-md-12 text-center" style="margin-bottom: 30px;">
+                    <h3>Need a drop shipper account instead?</h3>
+                    <p>Buyer accounts stay here, while drop shippers now have a separate website login and registration flow.</p>
+                    <p><a href="{{ route('dropshipper.login') }}" class="btn btn-default">Go to Drop Shipper Portal</a></p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="login">
                         <h2>Login</h2>

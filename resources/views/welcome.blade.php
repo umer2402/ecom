@@ -2302,7 +2302,7 @@
                 <p>Reach high-intent buyers, manage orders and grow your wholesale business.</p>
                 <ul class="market-footer-links">
                     <li><a href="{{ url('/seller/login.php') }}">Become a Supplier</a></li>
-                    <li><a href="{{ url('/seller/login.php') }}">Start Dropshipping</a></li>
+                    <li><a href="{{ route('dropshipper.login') }}">Start Dropshipping</a></li>
                     <li><a href="{{ url('/seller/login.php') }}">Seller Guide</a></li>
                     <li><a href="{{ url('/seller/login.php') }}">Profit Calculator</a></li>
                     <li><a href="{{ url('/seller/login.php') }}">Supplier Help Center</a></li>

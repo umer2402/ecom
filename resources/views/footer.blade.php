@@ -9,6 +9,7 @@
                         <li>Hello Wholesaler Marketplace</li>
                         <li>Secure ordering and verified suppliers</li>
                         <li>Email: <a href="{{ route('user.login') }}" class="active-color">Customer account</a></li>
+                        <li>Drop Shipper: <a href="{{ route('dropshipper.login') }}" class="active-color">Dropshipper portal</a></li>
                         <li>Seller Panel: <a href="{{ url('/seller') }}" class="active-color">Become a Seller</a></li>
                     </ul>
                 </address>
@@ -23,6 +24,7 @@
                         <li><a href="{{ route('checkout.index') }}">Checkout</a></li>
                         <li><a href="{{ route('orders.index') }}">My Orders</a></li>
                         <li><a href="{{ route('user.login') }}">My Account</a></li>
+                        <li><a href="{{ route('dropshipper.login') }}">Drop Shipper Login</a></li>
                     </ul>
                 </div>
             </div>

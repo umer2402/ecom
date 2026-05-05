@@ -28,6 +28,7 @@
             @else
                 <li><a href="{{ route('user.login') }}">Login</a></li>
             @endauth
+            <li><a href="{{ route('dropshipper.login') }}">Drop Shipper</a></li>
             <li><a href="{{ url('/seller') }}">Become a Seller</a></li>
         </menu>
     </div>
